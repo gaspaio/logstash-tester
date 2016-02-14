@@ -1,0 +1,2 @@
+# Syslog
+SYSLOG_CUSTOM <%{POSINT:syslog_pri}>%{SYSLOGTIMESTAMP:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program}(?:\[%{POSINT}\])?: %{GREEDYDATA:syslog_message}
