@@ -20,19 +20,19 @@ sanity, by unit testing everything.
 
 You should have a working Docker environment for **Logstash Tester** to work.
 
-1.  Setup the projet
+*1.  Setup the projet*
 
     This assumes your logstash config files are setup as follows:
 
     -   ```/etc/logstash/conf.d```: The Logstash filter config files should follow 
-    a naming convention: ```[some-custom-label].filter.conf```). They'll be loaded in alphabetical order.
+    a naming convention (```[some-custom-label].filter.conf```). They'll be loaded in alphabetical order.
 
     -   ```/etc/logstash/patterns```: your custom pattern files.
 
     Put you config files and patterns in the right directories (```/config/conf.d``` and
-    ```/config/patterns``` respectivelly).
+    ```/config/patterns``` respectively).
 
-3.  Write your test cases
+*3.  Write your test cases*
 
     Add your filter test cases to ```/test/spec/conf.d/filter_data.rb```. An example
     has been provided for you.
@@ -40,13 +40,13 @@ You should have a working Docker environment for **Logstash Tester** to work.
     Add your pattern test cases to ```/test/spec/patterns/patterns_data.rb```. An example
     has been provided for you.
 
-4.  Add any other spec files you want
+*4.  Add any other spec files you want*
 
     You can add any other specific test suites to ```/test/spec/patterns``` and
     ```/test/spec/conf.d```. They should be named [somename]_spec.rb, and they will be run
     along with the default tests.
 
-5.  Run tha thing
+*5.  Run tha thing*
 
 It's simple:
 
