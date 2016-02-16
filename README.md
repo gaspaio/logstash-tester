@@ -11,25 +11,25 @@ Test it, it works: ```./run.sh```.
 
 When your logstash config starts getting really long, and you start loosing control of
 all the cases covered by your custom Grok patterns, you know you're entering **Logstash
-Config Hell**
+Config Hell**.
 
-**Logstash Tester** allowed me to grow logstash config files, AND keep my
+**Logstash Tester** allows us (hopefully) to grow your logstash config files, AND keep your
 sanity, by unit testing everything.
 
-#### How to use this
+#### HOWTO use it
 
 You should have a working Docker environment for **Logstash Tester** to work.
 
 *1.  Setup the projet*
 
-This assumes your logstash config files are setup as follows:
+Logstash-Tester assumes your logstash config files are setup as follows:
 
 -   ```/etc/logstash/conf.d```: The Logstash filter config files should follow 
 a naming convention (```[some-custom-label].filter.conf```). They'll be loaded in alphabetical order.
 
 -   ```/etc/logstash/patterns```: your custom pattern files.
 
-Put you config files and patterns in the right directories (```/config/conf.d``` and
+Put your config files and patterns inside the right directories (```/config/conf.d``` and
 ```/config/patterns``` respectively).
 
 *3.  Write your test cases*
