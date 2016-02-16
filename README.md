@@ -5,7 +5,7 @@
 A set of tools to test your logstash config and custom patterns, using RSpec and
 Logstash running in a Docker container
 
-Test it it works: ```./run.sh```.
+Test it, it works: ```./run.sh```.
 
 ### Long version
 
