@@ -15,14 +15,14 @@ esac
 
 if $PATS ; then
   echo "###  RUN PATTERN TESTS    #####################"
-  ./opt/logstash/bin/rspec -f p /test/spec/patterns
+  rspec -f p /test/spec/patterns_spec.rb
 fi
 
 if $CONF ; then
   echo "###  TEST FILTERS SYNTAX  ####################"
-  ./opt/logstash/bin/logstash --configtest -f /etc/logstash/conf.d
+  logstash --configtest -f /etc/logstash/conf.d
 
   echo "###  RUN FILTER TESTS     ##################"
-  ./opt/logstash/bin/rspec -f p /test/spec/conf.d
+  rspec -f p /test/spec/filter_spec.rb
 fi
 

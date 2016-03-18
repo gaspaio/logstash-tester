@@ -1,0 +1,25 @@
+{
+  "name": "NES syslog message",
+  "fields": {
+    "type": "syslog"
+  },
+  "ignore": ["@version", "@timestamp"],
+  "cases": [{
+    "in": "<22>Feb  2 09:47:12 mail dovecot: pop3-login: Login: user=<somename@somedomain.fr>, method=PLAIN, rip=192.148.8.32, lip=192.148.34.126",
+    "out": {
+      "type": "syslog",
+      "message": "pop3-login: Login: user=<somename@somedomain.fr>, method=PLAIN, rip=192.148.8.32, lip=192.148.34.126",
+      "syslog_pri": "22",
+      "syslog_timestamp": "Feb  2 09:47:12",
+      "application": "dovecot",
+      "application_host": "mail",
+      "protocol": "pop3",
+      "action": "login",
+      "method": "plain",
+      "src": "192.148.8.32",
+      "dest": "192.148.34.126",
+      "user": "somename@somedomain.fr"
+    }
+  }]
+}
+

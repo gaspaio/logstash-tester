@@ -1,0 +1,38 @@
+{
+  "name": "Dovecot Login variations",
+  "pattern": "DOVECOT_LOGIN",
+  "cases": [
+    {
+      "in": "pop3-login: Login: user=<somename@somedomain.fr>, method=PLAIN, rip=192.148.8.32, lip=192.148.34.126",
+      "out": {
+        "protocol": "pop3",
+        "action": "Login",
+        "user": "somename@somedomain.fr",
+        "method": "PLAIN",
+        "remote_ip": "192.148.8.32",
+        "local_ip": "192.148.34.126"
+      }
+    },{
+      "in": "imap-login: Login: user=<somename@somedomain.fr>, method=PLAIN, rip=192.148.8.32, lip=192.148.34.126, TLS",
+      "out": {
+        "protocol": "imap",
+        "action": "Login",
+        "user": "somename@somedomain.fr",
+        "method": "PLAIN",
+        "remote_ip": "192.148.8.32",
+        "local_ip": "192.148.34.126"
+      }
+    },{
+      "in": "pop3-login: Disconnected (auth failed, 1 attempts): user=<somename@somedomain.fr>, method=PLAIN, rip=192.148.8.32, lip=192.148.34.126",
+      "out": {
+        "protocol": "pop3",
+        "action": "Disconnected",
+        "action_info": "auth failed, 1 attempts",
+        "user": "somename@somedomain.fr",
+        "method": "PLAIN",
+        "remote_ip": "192.148.8.32",
+        "local_ip": "192.148.34.126"
+      }
+    }
+  ]
+}
