@@ -13,14 +13,15 @@ pattern_data.each do |data_file|
     @@test_case['cases'].each_with_index do |item,i|
       name = "##{i} - #{item["in"][0..25]}..."
       expected_fields = item["out"].keys
+      pattern = @@test_case['pattern']
 
       it "'#{name}' shouldn't generate grokparsefailures" do
-        expect(grok_match(@@test_case['pattern'], item['in'])).to pass
+        expect(grok_match(pattern, item['in'])).to pass
       end
 
       # Expected fields are present, have expected value, and no other fields are present
       it "'#{name}' should be correct" do
-        match_res = grok_match(@@test_case['pattern'], item['in'])
+        match_res = grok_match(pattern, item['in'])
         # Ignore logstash added fields. These are always present.
         result_fields = match_res.keys.select { |f| not ['@version', '@timestamp', 'message'].include?(f) }
 
