@@ -20,14 +20,21 @@ sanity, by unit testing everything.
 
 You should have a working Docker environment for **Logstash Tester** to work.
 
-*1.  Setup the projet*
+An example is worth a thousant doc pages (sometimes), checkout the example runner file "run_example.sh"
+-   You should create you own
+    directory containing the config & pattern files you'll be testing as well as
+    the test cases for both filters and patterns.
+-   Then you'll copy run_example.sh into that directory, rename it and
+    put the correct directories in the conf section.
+-   Run it.
 
-Logstash-Tester assumes your logstash config files are setup as follows:
+Useful info:
+-   The Logstash filter config files should follow a naming convention
+    (```[some-custom-label].filter.conf```).
+    They'll be loaded in alphabetical order.
 
--   ```/etc/logstash/conf.d```: The Logstash filter config files should follow 
-a naming convention (```[some-custom-label].filter.conf```). They'll be loaded in alphabetical order.
-
--   ```/etc/logstash/patterns```: your custom pattern files.
+-   Logstash-tester assumes the patternsdir setting in grok filters is set to
+    ```/etc/logstash/patterns```.
 
 Put your config files and patterns inside the right directories (```/config/conf.d``` and
 ```/config/patterns``` respectively).

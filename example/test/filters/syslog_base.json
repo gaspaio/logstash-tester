@@ -1,5 +1,5 @@
 {
-  "name": "NES syslog message",
+  "name": "CUSTOM Syslog message",
   "fields": {
     "type": "syslog"
   },

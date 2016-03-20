@@ -20,7 +20,7 @@ fi
 
 if $CONF ; then
   echo "###  TEST FILTERS SYNTAX  ####################"
-  logstash --configtest -f /etc/logstash/conf.d
+  logstash --configtest -f /test/spec/filter_config
 
   echo "###  RUN FILTER TESTS     ##################"
   rspec -f p /test/spec/filter_spec.rb
