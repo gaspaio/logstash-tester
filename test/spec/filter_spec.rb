@@ -13,41 +13,45 @@ files.sort.each do |file|
   @@configuration << File.read(file)
 end
 
+def run_case(tcase, fields, ignore, data_file, i)
+  input = fields
+  input['message'] = tcase['in']
+
+  msg_header = "[#{File.basename(data_file)}##{i}]"
+
+   sample(input) do
+    expected = tcase['out']
+    expected_fields = expected.keys
+    lsresult = results[0]
+    result_fields = lsresult.to_hash.keys.select { |f| not ignore.include?(f) }
+
+    # Test for presence of expected fields
+    missing = expected_fields.select { |f| not result_fields.include?(f) }
+    msg = "\n#{msg_header} Fields missing in logstash output: #{missing}\n\n--"
+    expect(missing).to be_empty, msg
+
+    # Test for absence of unknown fields
+    extra = result_fields.select { |f| not expected_fields.include?(f) }
+    msg = "\n#{msg_header} Unexpected fields in logstash output: #{extra}\n\n--"
+    expect(extra).to be_empty, msg
+
+    # Test individual field values
+    expected.each do |name,value|
+      msg = "\n#{msg_header} Field mismatch: '#{name}'\nExpected: #{value}\nGot: #{lsresult[name]}\n\n--"
+      expect(lsresult[name]).to eq(value), msg
+    end
+  end
+end
+
 filter_data.each do |data_file|
-  # Load test case from each file
-  @@test_case = JSON.parse(File.read(data_file))
+  # Count test cases in this file
+  test_case = JSON.parse(File.read(data_file))
 
-  describe "#{@@test_case['name']}" do
-    config(@@configuration)
-    input = @@test_case['fields']
-    @@test_case['cases'].each_with_index do |item,i|
-        input['message'] = item['in']
-        expected = item["out"]
-        expected_fields = expected.keys
-
-        msg_header = "[#{File.basename(data_file)}##{i}]"
-
-        sample(input) do
-          lsresult = results[0]
-          result_fields = lsresult.to_hash.keys.select { |i| not @@test_case['ignore'].include?(i) }
-
-          # Test for presence of expected fields
-          missing = expected_fields.select { |f| not result_fields.include?(f) }
-          msg = "\n#{msg_header} Fields missing in logstash output: #{missing}"
-          expect(missing).to be_empty, msg
-
-          # Test for absence of unknown fields
-          extra = result_fields.select { |f| not expected_fields.include?(f) }
-          msg = "\n#{msg_header} Unexpected fields in logstash output: #{extra}\n\n--"
-          expect(extra).to be_empty, msg
-
-          # Test individual field values
-          expected.each do |name,value|
-            msg = "\n#{msg_header} Field mismatch: '#{name}'\nExpected: #{value}\nGot: #{lsresult[name]}\n\n--"
-            expect(lsresult[name]).to eq(value), msg
-          end
-        end
-
+  (0..(test_case['cases'].length-1)).each do |i|
+    describe "#{File.basename(data_file)}##{i}" do
+      config(@@configuration)
+      test_case = JSON.parse(File.read(data_file))
+      run_case(test_case['cases'][i], test_case['fields'], test_case['ignore'], data_file, i)
     end
   end
 end
