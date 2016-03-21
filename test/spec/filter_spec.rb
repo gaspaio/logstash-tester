@@ -25,6 +25,8 @@ def run_case(tcase, fields, ignore, data_file, i)
     lsresult = results[0]
     result_fields = lsresult.to_hash.keys.select { |f| not ignore.include?(f) }
 
+    # TODO test for grokparsefailures
+
     # Test for presence of expected fields
     missing = expected_fields.select { |f| not result_fields.include?(f) }
     msg = "\n#{msg_header} Fields missing in logstash output: #{missing}\n\n--"
@@ -32,7 +34,7 @@ def run_case(tcase, fields, ignore, data_file, i)
 
     # Test for absence of unknown fields
     extra = result_fields.select { |f| not expected_fields.include?(f) }
-    msg = "\n#{msg_header} Unexpected fields in logstash output: #{extra}\n\n--"
+    msg = "\n#{msg_header} Unexpected fields in logstash output: #{extra}\nComplete logstash output: #{lsresult.to_hash}\n--"
     expect(extra).to be_empty, msg
 
     # Test individual field values
