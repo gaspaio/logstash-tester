@@ -29,7 +29,7 @@ def run_case(tcase, fields, ignore, data_file, i)
 
     # Test for presence of expected fields
     missing = expected_fields.select { |f| not result_fields.include?(f) }
-    msg = "\n#{msg_header} Fields missing in logstash output: #{missing}\n\n--"
+    msg = "\n#{msg_header} Fields missing in logstash output: #{missing}\nComplete logstash output: #{lsresult.to_hash}\n--"
     expect(missing).to be_empty, msg
 
     # Test for absence of unknown fields
