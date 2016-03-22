@@ -16,7 +16,9 @@ pattern_data.each do |data_file|
       pattern = @@test_case['pattern']
 
       it "'#{name}' shouldn't generate grokparsefailures" do
-        expect(grok_match(pattern, item['in'])).to pass
+        match_res = grok_match(pattern, item['in'])
+        msg = "Parse failure for test case #{name}.\nComplete grok output: #{match_res}\n\n--"
+        expect(match_res).to pass, msg
       end
 
       # Expected fields are present, have expected value, and no other fields are present
@@ -27,17 +29,17 @@ pattern_data.each do |data_file|
 
         # test for missing fields in match output
         missing = expected_fields.select { |f| not result_fields.include?(f) }
-        msg = "\nFields missing in pattern output: #{missing}\n\n--"
+        msg = "\nFields missing in pattern output: #{missing}\nComplete grok output: #{match_res}\n\n--"
         expect(missing).to be_empty, msg
 
         # test for unexpected fields in match output
         extra = result_fields.select { |f| not expected_fields.include?(f) }
-        msg = "\nUnexpected fields in pattern output: #{extra}\n\n--"
+        msg = "\nUnexpected fields in pattern output: #{extra}\nComplete grok output: #{match_res}\n\n--"
         expect(extra).to be_empty, msg
 
         # test for field values
         item['out'].each do |name,value|
-          msg = "\nField mismatch: '#{name}'\nExpected: #{value}\nGot: #{match_res[name]}\n\n--"
+          msg = "\nField mismatch: '#{name}'\nExpected: #{value}\nGot: #{match_res[name]}\nComplete grok output: #{match_res}\n\n--"
           expect(match_res[name]).to eq(value), msg
         end
       end
