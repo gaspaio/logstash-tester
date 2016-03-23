@@ -7,7 +7,7 @@ require 'json'
 filter_data = Dir[File.join(File.dirname(__FILE__), 'filter_data/**/*.json')]
 
 # Load the logstash filter config files
-files = Dir[File.join(File.dirname(__FILE__), 'filter_config/*.conf')]
+files = Dir[File.join(File.dirname(__FILE__), 'filter_config/*.filter.conf')]
 @@configuration = String.new
 files.sort.each do |file|
   @@configuration << File.read(file)
