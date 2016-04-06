@@ -19,8 +19,8 @@ if $PATS ; then
 fi
 
 if $CONF ; then
-  echo "###  TEST FILTERS SYNTAX  ####################"
-  logstash --configtest -f /test/spec/filter_config
+#  echo "###  TEST FILTERS SYNTAX  ####################"
+#  logstash --configtest -f /test/spec/filter_config
 
   echo "###  RUN FILTER TESTS     ##################"
   rspec -f p /test/spec/filter_spec.rb
