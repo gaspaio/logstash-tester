@@ -17,6 +17,12 @@ FILTER_TESTS='example/test/filters'     # Test case files
 PATTERN_TESTS='example/test/patterns'
 # END CONFIGURATION ###################
 
+# Specify the filter directory: execute only a subset of filter tests
+# Usage: run_example.sh filter somedir
+# TODO: use getops (http://tuxtweaks.com/2014/05/bash-getopts/)
+if [ -n $2 ]; then
+    FILTER_TESTS="$FILTER_TESTS/$2"
+fi
 
 set -e
 
