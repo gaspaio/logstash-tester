@@ -23,7 +23,9 @@ def run_case(tcase, fields, ignore, data_file, i)
    sample(input) do
     expected = tcase['out']
     expected_fields = expected.keys
-    lsresult = results[0]
+
+    # Handle no results (for example, when a line is voluntarily dropped)
+    lsresult = results.any? ? results[0] : {}
     result_fields = lsresult.to_hash.keys.select { |f| not ignore.include?(f) }
 
     # TODO test for grokparsefailures

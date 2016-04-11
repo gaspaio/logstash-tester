@@ -1,0 +1,13 @@
+{
+  "name": "Misc cases",
+  "fields": {
+    "type": "syslog"
+  },
+  "ignore": ["@version", "@timestamp"],
+  "cases": [{
+    "#": "empty line send to logstash",
+    "in": "",
+    "out": {}
+  }]
+}
+
