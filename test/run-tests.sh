@@ -1,28 +1,15 @@
 #!/bin/bash
-set -e
-
-PATS=true
-CONF=true
-
-case "$1" in
-"filter")
-  PATS=false
-  ;;
-"patterns")
-  CONF=false
-  ;;
-esac
-
-if $PATS ; then
-  echo "###  RUN PATTERN TESTS    #####################"
-  rspec -f p /test/spec/patterns_spec.rb
+if [[ $1 == "all" || $1 == "patterns" ]]; then
+    echo "###  RUN PATTERN TESTS    #####################"
+    rspec -f p /test/spec/patterns_spec.rb
 fi
 
-if $CONF ; then
-#  echo "###  TEST FILTERS SYNTAX  ####################"
-#  logstash --configtest -f /test/spec/filter_config
+if [[ $1 == "all" || $1 == "filters" ]]; then
+    echo "###  RUN FILTER Tests  ####################"
+    if [[ $2 == "y" ]]; then
+        logstash --configtest -f /test/spec/filter_config
+    fi
 
-  echo "###  RUN FILTER TESTS     ##################"
-  rspec -f p /test/spec/filter_spec.rb
+    rspec -f p /test/spec/filter_spec.rb
 fi
 
