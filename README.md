@@ -1,6 +1,6 @@
 # Logstash Tester [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](/LICENSE)
 
-### TL;DR
+## TL;DR
 
 Logstash Tester is a tool to write and run unit tests against your Logstash config files and/or your custom patterns.
 It uses RSpec and Logstash running in a Docker container
@@ -9,7 +9,7 @@ Test it, it works: ```./run_example.sh``` (You must have a running Docker enviro
 
 Type ```./logstash-tester.sh -h``` to see the available options.
 
-### Long version
+## Long version
 
 When your logstash config starts getting really long, and you start loosing control of
 all the cases covered by your custom Grok patterns, you know you're entering **Logstash
@@ -108,7 +108,7 @@ Since an example is (sometimes) worth a thousand words, check out the 'example' 
 
 -   Logstash-tester assumes the patternsdir setting in grok filters is set to ```/etc/logstash/patterns```.
 
-**Examples*
+**Examples**
 
 Using the "example" data directory:
 
@@ -126,13 +126,13 @@ Using the "example" data directory:
 
 Type ```./logstash-tester.sh -h``` to know more about the command line options.
 
-### Some other stuff
+#### Some other stuff
 
 I'm not a rubyist, the ruby code in the test suites was hacked together from bits
 and pieces found here and there. If you're a rubyist, please clean up my mess
 and do me a pull request :-). If you're not a rubyistm neither, don't worry, it works.
 
-### Credits
+#### Credits
 
 *Logstash Tester* is strongly inspired by two interesting projects: 
 - [RSpec logstash filter](https://github.com/tcnksm/rspec-logstash-filter).
