@@ -36,7 +36,7 @@ You should have a directory (the data dir) structured in the following way:
 
 **2. Test case files**    
 
-Test cases are written in JSON. When logstash-tester runs, looks for test cases in every file matching *<data_dir>/test/patterns/\*.json* and *<data_dir>/test/filters/\*.json*
+Test cases are written in JSON. When logstash-tester runs, it looks for test cases in every file matching ```<data_dir>/test/patterns/**/*.json``` and ```<data_dir>/test/filters/**/*.json```.
 
 Test case syntax is pretty straigtforward.
 
@@ -71,7 +71,7 @@ Here's a filter testcase taken from the examples :
 
 -   *fields*: the values are are expected to be appended to the message object by the input plugin.
 -   *ignore*: a list of keys that will be ignored in the logstash output
--   *cases*: is the list of test each with an "in" field containing the message to pass through the filtering pipeline and a "out" object field with the exact expected output.
+-   *cases*: the list of test cases each with an "in" field containing the message to pass through the filtering pipeline and a "out" object field with the exact expected output.
 
 Pattern test cases are described pretty much in the same way :
 
