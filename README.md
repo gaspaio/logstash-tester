@@ -36,7 +36,7 @@ You should have a directory (the data dir) structured in the following way:
 
 **2. Test case files**    
 
-Test cases are written in JSON. When logstash-tester runs, looks for test cases in every file matching *<data_dir>/test/patterns/\*\*/\*.json* and *<data_dir>/test/filters/\*\*/\*.json*
+Test cases are written in JSON. When logstash-tester runs, looks for test cases in every file matching *<data_dir>/test/patterns/\*.json* and *<data_dir>/test/filters/\*.json*
 
 Test case syntax is pretty straigtforward.
 
