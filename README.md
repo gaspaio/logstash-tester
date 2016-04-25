@@ -134,8 +134,8 @@ and do me a pull request :-). If you're not a rubyistm neither, don't worry, it 
 
 #### Credits
 
-*Logstash Tester* is strongly inspired by two interesting projects: 
-- [RSpec logstash filter](https://github.com/tcnksm/rspec-logstash-filter).
-- Another projet of the same sort, written in #golangm with json test case files. I can't find it anymore oneline, will update this line when I do.
+*Logstash Tester* drew its inspiration from two interesting projects: 
+- [RSpec logstash filter](https://github.com/tcnksm/rspec-logstash-filter)
+- [Logstash filter verifier](https://github.com/magnusbaeck/logstash-filter-verifier)
 
 
