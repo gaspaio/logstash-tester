@@ -1,6 +1,6 @@
-FROM logstash:2.3
+FROM logstash:2.3.1
 
-RUN plugin install --development
+RUN logstash-plugin install --development
 
 ARG FILTER_CONFIG
 ARG PATTERN_CONFIG
