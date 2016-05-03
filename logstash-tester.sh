@@ -1,4 +1,5 @@
 #!/bin/bash
+
 usage() {
     echo "
     Logstash Tester - Unit-testing for Logstash configuration fields
@@ -56,13 +57,16 @@ run_docker() {
         error "Can't find the Docker executable. Did you install it?"
     fi
 
+    rootdir=`dirname $0`
+
     echo "====> Build docker image for test"
     docker build -t gaspaio/logstash-tester \
+        --build-arg LST=$rootdir \
         --build-arg FILTER_CONFIG=$3 \
         --build-arg PATTERN_CONFIG=$4 \
         --build-arg FILTER_TESTS=$5 \
         --build-arg PATTERN_TESTS=$6 \
-        -f Dockerfile .
+        -f $rootdir/Dockerfile .
 
     echo "====> Run test in docker container"
     docker run --rm -it gaspaio/logstash-tester $action $configtest
