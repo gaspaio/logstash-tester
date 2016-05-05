@@ -15,12 +15,6 @@ pattern_data.each do |data_file|
       expected_fields = item["out"].keys
       pattern = @@test_case['pattern']
 
-      it "'#{name}' shouldn't generate grokparsefailures" do
-        match_res = grok_match(pattern, item['in'])
-        msg = "Parse failure for test case #{name}.\nComplete grok output: #{match_res}\n\n--"
-        expect(match_res).to pass, msg
-      end
-
       # Expected fields are present, have expected value, and no other fields are present
       it "'#{name}' should be correct" do
         match_res = grok_match(pattern, item['in'])
