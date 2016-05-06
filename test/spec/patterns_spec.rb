@@ -19,22 +19,22 @@ pattern_data.each do |data_file|
       it "'#{name}' should be correct" do
         match_res = grok_match(pattern, item['in'])
         # Ignore logstash added fields. These are always present.
-        result_fields = match_res.keys.select { |f| not ['@version', '@timestamp', 'message'].include?(f) }
+        result = match_res.select{ |x| !['@version', '@timestamp', 'message'].include?(x) }
 
         # test for missing fields in match output
-        missing = expected_fields.select { |f| not result_fields.include?(f) }
-        msg = "\nFields missing in pattern output: #{missing}\nComplete grok output: #{match_res}\n\n--"
+        missing = expected_fields.select { |f| not result.keys.include?(f) }
+        msg = "\nFields missing in pattern output: #{missing}\nComplete grok output: #{result}\n\n--"
         expect(missing).to be_empty, msg
 
         # test for unexpected fields in match output
-        extra = result_fields.select { |f| not expected_fields.include?(f) }
-        msg = "\nUnexpected fields in pattern output: #{extra}\nComplete grok output: #{match_res}\n\n--"
+        extra = result.keys.select { |f| not expected_fields.include?(f) }
+        msg = "\nUnexpected fields in pattern output: #{extra}\nComplete grok output: #{result}\n\n--"
         expect(extra).to be_empty, msg
 
         # test for field values
         item['out'].each do |name,value|
-          msg = "\nField mismatch: '#{name}'\nExpected: #{value}\nGot: #{match_res[name]}\nComplete grok output: #{match_res}\n\n--"
-          expect(match_res[name]).to eq(value), msg
+          msg = "\nField mismatch: '#{name}'\nExpected: #{value}\nGot: #{match_res[name]}\nComplete grok output: #{result}\n\n--"
+          expect(result[name]).to eq(value), msg
         end
       end
     end
