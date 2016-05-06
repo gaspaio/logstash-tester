@@ -1,0 +1,23 @@
+{
+  "name": "Misc examples",
+  "pattern": "SYSLOG_CUSTOM",
+  "cases": [
+    {
+      "in": "<53>Feb  2 09:47:12 www apache2: some apache message",
+      "out": {
+        "syslog_pri": "53",
+        "syslog_timestamp": "Feb  2 09:47:12",
+        "syslog_hostname": "www",
+        "syslog_program": "apache2",
+        "syslog_message": "some apache message"
+      }
+    },
+    {
+      "#": "This is an example of negative testing: this message should fail parsing",
+      "in": "Feb  2 09:47:12 www apache2: invalid syslog message",
+      "out": {
+        "tags": ["_grokparsefailure"]
+      }
+    }
+  ]
+}
